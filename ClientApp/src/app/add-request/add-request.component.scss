@@ -1,0 +1,34 @@
+@import '../view-request/view-request.component';
+
+.input {
+  margin-top: -20px;
+}
+.full-width {
+  width: 100%;
+}
+
+.adding-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.adding-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.adding-table {
+  display: flex;
+  align-items: center;
+}
+
+.example-events {
+  width: 400px;
+  height: 200px;
+  border: 1px solid #555;
+  overflow: auto;
+}

@@ -1,0 +1,149 @@
+@import "../home/home.component.css";
+
+.request {
+  display: flex;
+  flex-direction: column;
+}
+
+.request-info {
+  display: flex;
+}
+
+
+.request-info-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows:50px 50px  1fr 50px 50px 50px 50px 50px 50px 50px 50px;
+  grid-template-areas: "request_no request_no_v" "requester requester_v" "request_office request_office_v" "request_date request_date_v" "request_status request_status_v" "request_type request_type_v" "required_delivery_date required_delivery_date_v" "technical_contact technical_contact_v" "phone phone_v" "technical_approval_required technical_approval_required_v";
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.request_no { grid-area: request_no; }
+
+.request_no_v { grid-area: request_no_v; }
+
+.requester { grid-area: requester; }
+
+.requester_v { grid-area: requester_v; }
+
+.request_office { grid-area: request_office; }
+
+.request_office_v { grid-area: request_office_v; }
+
+.request_date { grid-area: request_date; }
+
+.request_date_v { grid-area: request_date_v; }
+
+.request_status { grid-area: request_status; }
+
+.request_status_v { grid-area: request_status_v; }
+
+.request_type { grid-area: request_type; }
+
+.request_type_v { grid-area: request_type_v; }
+
+.required_delivery_date_v { grid-area: required_delivery_date_v; }
+
+.required_delivery_date { grid-area: required_delivery_date; }
+
+.technical_contact { grid-area: technical_contact; }
+
+.technical_contact_v { grid-area: technical_contact_v; }
+
+.phone { grid-area: phone; }
+
+.phone_v { grid-area: phone_v; }
+
+.required_delivery_date { grid-area: required_delivery_date; }
+
+.technical_approval_required { grid-area: technical_approval_required; }
+
+.technical_approval_required_v { grid-area: technical_approval_required_v; }
+
+
+.request-info-descriptions {
+  margin: 20px;
+}
+
+.renewal-contract {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+
+.supplier {
+
+}
+
+.purchase-line-items {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.line-items {
+  width: 80%;
+}
+
+.agree-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 200px;
+}
+
+
+
+
+
+/* Table */
+
+table {
+  width: 100%;
+  cursor: pointer;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}

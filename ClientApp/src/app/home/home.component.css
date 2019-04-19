@@ -1,0 +1,27 @@
+.tabs {
+  max-width: 1000px;
+}
+.tab {
+  padding: 20px;
+}
+.table-container {
+  height: 500px;
+  overflow: auto;
+}
+table {
+  width: 100%;
+}
+.table-button {
+  width: 30px;
+  height: 30px;
+  margin: 0 2px;
+  outline: none;
+  float: right;
+}
+.table-menu-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: -15px;
+  margin-left: -3px;
+}
+

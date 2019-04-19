@@ -1,0 +1,265 @@
+<div class="request">
+  <div class="request-info">
+    <div class="request-info-details full-width">
+      <div class="request_no" style="margin: 0;">Requester No.</div>
+      <div class="request_no_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.requestNo">
+        </mat-form-field>
+      </div>
+      <div class="requester">Requester</div>
+      <div class="requester_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.requester">
+        </mat-form-field>
+      </div>
+      <div class="request_office">Request Office</div>
+      <div class="request_office_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.requestOffice">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.requestOffice2">
+        </mat-form-field>
+      </div>
+      <div class="request_date">Request Date</div>
+      <div class="request_date_v">
+        <!--<mat-form-field class="input">-->
+          <!--<input matInput [(ngModel)]="request.requestDate">-->
+        <!--</mat-form-field>-->
+
+        <mat-form-field style="margin-top: -15px;">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="request.requestDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+      </div>
+      <div class="request_status">Request Status</div>
+      <div class="request_status_v">
+        <mat-form-field class="input">
+          <input matInput value="Request Generated" disabled>
+        </mat-form-field>
+      </div>
+      <div class="request_type">Request Type</div>
+      <div class="request_type_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.requestType">
+        </mat-form-field>
+      </div>
+      <div class="required_delivery_date">Required Delivery Date</div>
+      <div class="required_delivery_date_v">
+        <!--<mat-form-field class="input">-->
+          <!--<input matInput [(ngModel)]="request.requiredDeliveryDate">-->
+        <!--</mat-form-field>-->
+        <mat-form-field style="margin-top: -15px;">
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="request.requiredDeliveryDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="technical_contact">Technical Contact</div>
+      <div class="technical_contact_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.technicalContact">
+        </mat-form-field>
+      </div>
+      <div class="phone">Phone</div>
+      <div class="phone_v">
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.phone">
+        </mat-form-field>
+      </div>
+      <div class="technical_approval_required">Technical Approval Required</div>
+      <div class="technical_approval_required_v">
+        <mat-checkbox class="example-margin" style="margin-left: 5px; " [(ngModel)]="request.technicalApprovalRequired"></mat-checkbox> <!--[(ngModel)]="request.technicalApprovalRequired"-->
+
+      </div>
+    </div>
+    <div class="request-info-descriptions full-width" >
+      <span>Description/Remarks</span>
+      <div>
+        <mat-form-field style="width: 500px;">
+          <textarea matInput [(ngModel)]="request.description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="renewal-contract">
+    <mat-checkbox [(ngModel)]="request.renewalContract"
+      class="example-margin" style="margin-right: 5px;"></mat-checkbox> <!--[(ngModel)]="request.renewalContract"-->
+
+    <span>Renewal Contract</span>
+
+  </div>
+  <div class="supplier">
+    <span>Supplier:   </span>
+    <span>
+        <mat-form-field class="input">
+          <input matInput [(ngModel)]="request.supplier">
+        </mat-form-field>
+    </span>
+  </div>
+
+  <h3>Line Items</h3>
+  <div class="purchase-line-items">
+    <div class="line-items">
+
+      <table mat-table
+             [dataSource]="dataSource" multiTemplateDataRows
+             class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let element" (click)="cancelAddAccLine()"> {{element[column]}}</td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length" >
+            <div
+                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+              <h5>Acc Line</h5>
+              <div class="example-element-detail">
+                <table style="margin: 20px;">
+                  <tr>
+                    <th>Sub Center No</th>
+                    <th>Amount</th>
+                  </tr>
+                  <tr *ngFor="let acc of element['accLines']">
+                    <td>{{acc['subCenterNo']}}</td>
+                    <td>{{acc['amount']}}</td>
+                  </tr>
+                </table>
+              </div>
+
+
+
+              <div *ngIf="addingAccLine" class="adding-line">
+                <mat-form-field >
+                  <input matInput #SubCenterNo placeholder="Sub Center No" type="number">
+                </mat-form-field>
+                <mat-form-field style="width: 70px;">
+                  <input matInput #AmountAcc placeholder="Amount" type="number">
+                </mat-form-field>
+
+                <div style="display: flex;">
+                  <button mat-mini-fab color="warn" style="background-color: green" class="table-button" (click)="addAccLine(element['lineId'])">
+                    <i class="material-icons table-menu-icon">
+                      check
+                    </i>
+                  </button>
+                  <button mat-mini-fab color="warn" class="table-button" (click)="cancelAddAccLine()">
+                    <i class="material-icons table-menu-icon">
+                      delete_outline
+                    </i>
+                  </button>
+                </div>
+              </div>
+
+
+
+              <div *ngIf="!addingAccLine" class="adding-buttons">
+                <button (click)="addingAccLine = true;" mat-mini-fab color="basic" class="table-button" style="outline: none;">
+                  <i class="material-icons table-menu-icon">
+                    add
+                  </i>
+                </button>
+              </div>
+
+
+
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+
+        <div *ngIf="addingLine" class="adding-line">
+          <mat-form-field >
+            <input matInput #Description placeholder="Description">
+          </mat-form-field>
+          <mat-form-field style="width: 70px;">
+            <input matInput #Quantity placeholder="Quantity" type="number">
+          </mat-form-field>
+          <mat-form-field style="width: 70px;">
+            <input matInput #Unit placeholder="Unit">
+          </mat-form-field>
+          <mat-form-field style="width: 90px;">
+            <input matInput #UnitPrice placeholder="Unit Price" type="number">
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput #BudgetObject placeholder="Budget Object" type="number">
+          </mat-form-field>
+          <mat-form-field >
+            <input matInput #Amount placeholder="Amount" type="number">
+          </mat-form-field>
+          <div style="display: flex;">
+            <button mat-mini-fab color="warn" style="background-color: green" class="table-button" (click)="addLineToRequest()">
+              <i class="material-icons table-menu-icon">
+                check
+              </i>
+            </button>
+            <button mat-mini-fab color="warn" class="table-button" (click)="cancelAddLineToRequest()">
+              <i class="material-icons table-menu-icon">
+                delete_outline
+              </i>
+            </button>
+          </div>
+        </div>
+
+      <div *ngIf="!addingLine" class="adding-buttons">
+        <button (click)="addingLine = true;" mat-mini-fab color="basic" class="table-button" style="outline: none;">
+          <i class="material-icons table-menu-icon">
+            add
+          </i>
+        </button>
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <div >
+
+        <div style="padding: 20px; float: left">
+          <span>Note</span>
+          <div>
+            <mat-form-field style="width: 500px;">
+              <textarea matInput [(ngModel)]="request.notes[0].content"></textarea>
+            </mat-form-field>
+          </div>
+          <button mat-button color="basic" class="table-button">Add file</button>
+
+        </div>
+  </div>
+
+  <div class="full-width agree-buttons" >
+    <button mat-mini-fab color="primary" (click)="addRequest()">
+      <i class="material-icons">
+        check
+      </i>
+    </button>
+    <button mat-mini-fab color="warn" (click)="resetRequest()">
+      <i class="material-icons">
+        delete_outline
+      </i>
+    </button>
+  </div>
+
+</div>
